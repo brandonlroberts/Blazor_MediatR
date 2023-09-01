@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+	  <PackageReference Include="MediatR" Version="12.1.1" />
+	  <PackageReference Include="FluentValidation" Version="11.7.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.9" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blazor_MediatR2.Components\Blazor_MediatR2.Components.csproj" />
+  </ItemGroup>
+
+</Project>

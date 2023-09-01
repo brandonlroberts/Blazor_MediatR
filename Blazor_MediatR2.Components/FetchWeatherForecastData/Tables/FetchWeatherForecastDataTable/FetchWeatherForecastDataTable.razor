@@ -1,0 +1,53 @@
+﻿@using static Blazor_MediatR2.Components.FetchWeatherForecastData.Tables.FetchWeatherForecastDataTable.FetchWeatherForcastDataForTableHandler;
+@inject IMediator MediatR;
+@inject ILocalStorageService LocalStorage
+@inject IEventAggregatorService EventAggregator
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+                <th>Created By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                    <td>@forecast.CreateBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<FetchWeatherForecastDataViewModel>? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await MediatR.Send(new GetForecast(pageSize: 10));
+        await LocalStorage.SetItemAsync<List<FetchWeatherForecastDataViewModel>>("forecasts", forecasts);
+        EventAggregator.Subscribe("refresh_weather_forecast_table", RefreshWeatherForcastTable);
+    }
+
+    private async void RefreshWeatherForcastTable(object? result = null)
+    {
+        forecasts = await LocalStorage.GetItemAsync<List<FetchWeatherForecastDataViewModel>>("forecasts");
+        StateHasChanged();
+    }
+}

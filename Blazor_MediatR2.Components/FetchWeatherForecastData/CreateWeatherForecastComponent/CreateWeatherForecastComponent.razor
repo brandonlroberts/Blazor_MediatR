@@ -1,0 +1,37 @@
+﻿@inject IMediator _mediator;
+
+@if (errors != null)
+{
+    foreach (var error in errors)
+    {
+        <span style="font-weight:bolder; color:red; margin-top:10px;"> - @error</span>
+    }
+}
+
+<span style="font-weight:bolder;">ADD FORECAST</span>
+<div style="display:flex; flex-direction:column; padding:10px; border:solid; border-radius:5px; width:200px;">
+    <span>Summary </span><input type="text" title="Summary" @bind-value="forecast.Summary">
+    <span>Temp C </span><input type="number" title="Tempurature C" @bind-value="forecast.TemperatureC">
+    <span>Created by </span><input type="text" title="Created By" @bind-value="forecast.CreateBy">
+    <button style="width:100px; margin-top:10px;" type="button" @onclick="CreateWeatherForecast">Submit</button>
+</div>
+
+@code {
+    private CreateWeatherForecastViewModel forecast = new();
+    private string[]? errors = null;
+
+    private async void CreateWeatherForecast()
+    {
+        try
+        {
+            errors = null;
+            var response = await _mediator.Send(new
+                CreateWeatherForecast.Request(forecast.TemperatureC!, forecast.Summary!, forecast.CreateBy));
+        }
+        catch (Exception ex)
+        {
+            errors = ex.Message.Split('\n');
+            StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,35 @@
+﻿[
+  {
+    "date": "2022-01-06",
+    "temperatureC": 1,
+    "summary": "Freezing",
+    "createby": "Joe Burrow"
+  },
+  {
+    "date": "2022-01-07",
+    "temperatureC": 14,
+    "summary": "Bracing",
+    "createby": "Jamar Chase"
+
+  },
+  {
+    "date": "2022-01-08",
+    "temperatureC": -13,
+    "summary": "Freezing",
+    "createby": "Tee Higgins"
+
+  },
+  {
+    "date": "2022-01-09",
+    "temperatureC": -16,
+    "summary": "Balmy",
+    "createby": "Tyler Boyd"
+
+  },
+  {
+    "date": "2022-01-10",
+    "temperatureC": -2,
+    "summary": "Chilly",
+    "createby": "Mike Hilton"
+  }
+]
